@@ -3,8 +3,10 @@ import React, { useState } from "react";
 export default function AddTodo({ onAddNewTodo = () => {} }) {
   const [text, setText] = useState("");
   const onAddNewTodoClick = () => {
-    onAddNewTodo(text);
-    setText("");
+    if (text.trim()) {
+      onAddNewTodo(text);
+      setText("");
+    }
   };
   return (
     <div>
