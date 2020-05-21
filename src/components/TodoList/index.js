@@ -21,6 +21,7 @@ export default function ToDoList() {
 
   return (
     <>
+      <b>React Version: {React.version}</b>
       <AddTodo onAddNewTodo={onAddNewTodo}></AddTodo>
       <TodoList todos={todos} onDeleteTodo={onDeleteTodo}></TodoList>
     </>
