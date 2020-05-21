@@ -6,19 +6,23 @@ export default function ToDoList() {
   const [todos, setTodos] = useState([]);
 
   const onAddNewTodo = (title) => {
-    setTodos([
-      ...todos,
+    setTodos((preTodos) => [
+      ...preTodos,
       {
-        id: todos.length + 1,
+        id: preTodos.length + 1,
         title,
       },
     ]);
   };
 
+  const onDeleteTodo = (id) => {
+    setTodos((preTodos) => preTodos.filter((todo) => todo.id !== id));
+  };
+
   return (
     <>
       <AddTodo onAddNewTodo={onAddNewTodo}></AddTodo>
-      <TodoList todos={todos}></TodoList>
+      <TodoList todos={todos} onDeleteTodo={onDeleteTodo}></TodoList>
     </>
   );
 }
