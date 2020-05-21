@@ -9,18 +9,18 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: "React With Webpack",
-      template: "index.html"
-    })
+      template: "index.html",
+    }),
   ],
   output: {
     filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "dist")
+    path: path.resolve(__dirname, "dist"),
   },
   devtool: "inline-source-map",
   devServer: {
-    contentBase: "./dist"
+    contentBase: "./dist",
   },
   module: {
-    rules: [{ test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }]
-  }
+    rules: [{ test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }],
+  },
 };

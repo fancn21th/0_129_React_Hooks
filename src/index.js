@@ -1,5 +1,5 @@
 import React from "react";
 import { render } from "react-dom";
-import Feedback from "./components/Feedback";
+import Input from "./components/Input";
 
-render(<Feedback />, document.getElementById("root"));
+render(<Input />, document.getElementById("root"));
