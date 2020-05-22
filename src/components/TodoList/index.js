@@ -2,29 +2,40 @@ import React, { useState, useEffect } from "react";
 import AddTodo from "./components/AddTodo";
 import TodoList from "./components/TodoList";
 
-export default function ToDoList() {
-  // 初始化方法 2
-  const initialTodos = () =>
-    JSON.parse(window.localStorage.getItem("todos") || "[]");
-  const [todos, setTodos] = useState(initialTodos);
-
-  // 初始化方法 1
-  // useEffect(() => {
-  //   const lsTodos = JSON.parse(localStorage.getItem("todos")) || [];
-  //   setTodos(lsTodos);
-  // }, []);
-
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
-
-  useEffect(() => {
-    const imCompleteTodosCount = todos.reduce(
-      (acc, todo) => (!todo.completed ? acc + 1 : acc),
-      0
+const useLocalStorage = (key, defaultValue, callback) => {
+  const initialValue = () => {
+    const valueFromStorage = JSON.parse(
+      window.localStorage.getItem(key) || JSON.stringify(defaultValue)
     );
-    document.title = `Todos (${imCompleteTodosCount})`;
-  });
+    if (callback) callback(valueFromStorage);
+    return valueFromStorage;
+  };
+  const [storage, setStorage] = useState(initialValue);
+
+  useEffect(() => {
+    window.localStorage.setItem(key, JSON.stringify(storage));
+  }, [storage]);
+
+  return [storage, setStorage];
+};
+
+const useDocumentTitle = (title) => {
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
+};
+
+export default function ToDoList() {
+  const [todos, setTodos] = useLocalStorage("todos", [], (values) => {});
+
+  const imCompleteTodosCount = todos.reduce(
+    (acc, todo) => (!todo.completed ? acc + 1 : acc),
+    0
+  );
+
+  const title = `Todos (${imCompleteTodosCount})`;
+
+  useDocumentTitle(title);
 
   const onAddNewTodo = (title) => {
     setTodos((preTodos) => [
