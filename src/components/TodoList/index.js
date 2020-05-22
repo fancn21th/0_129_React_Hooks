@@ -18,6 +18,14 @@ export default function ToDoList() {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
+  useEffect(() => {
+    const imCompleteTodosCount = todos.reduce(
+      (acc, todo) => (!todo.completed ? acc + 1 : acc),
+      0
+    );
+    document.title = `Todos (${imCompleteTodosCount})`;
+  });
+
   const onAddNewTodo = (title) => {
     setTodos((preTodos) => [
       ...preTodos,
