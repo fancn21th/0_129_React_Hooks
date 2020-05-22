@@ -15,7 +15,7 @@ export default function ToDoList() {
   // }, []);
 
   useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
+    window.localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
   useEffect(() => {
