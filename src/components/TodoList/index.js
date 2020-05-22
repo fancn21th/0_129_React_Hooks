@@ -3,12 +3,16 @@ import AddTodo from "./components/AddTodo";
 import TodoList from "./components/TodoList";
 
 export default function ToDoList() {
-  const [todos, setTodos] = useState([]);
+  // 初始化方法 2
+  const initialTodos = () =>
+    JSON.parse(window.localStorage.getItem("todos") || "[]");
+  const [todos, setTodos] = useState(initialTodos);
 
-  useEffect(() => {
-    const lsTodos = JSON.parse(localStorage.getItem("todos")) || [];
-    setTodos(lsTodos);
-  }, []);
+  // 初始化方法 1
+  // useEffect(() => {
+  //   const lsTodos = JSON.parse(localStorage.getItem("todos")) || [];
+  //   setTodos(lsTodos);
+  // }, []);
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
