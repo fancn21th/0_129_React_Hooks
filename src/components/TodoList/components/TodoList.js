@@ -7,10 +7,11 @@ export default function TodoList({
 }) {
   return (
     <ul>
-      {todos.map(({ id, title }) => (
+      {todos.map(({ id, title, completed }) => (
         <li key={id}>
           <input
             type="checkbox"
+            checked={completed}
             onChange={() => {
               onCheckTodo(id);
             }}

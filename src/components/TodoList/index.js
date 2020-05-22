@@ -20,6 +20,7 @@ export default function ToDoList() {
       {
         id: preTodos.length + 1,
         title,
+        completed: false,
       },
     ]);
   };
@@ -28,11 +29,23 @@ export default function ToDoList() {
     setTodos((preTodos) => preTodos.filter((todo) => todo.id !== id));
   };
 
+  const onCheckTodo = (id) => {
+    setTodos((preTodos) =>
+      preTodos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
+  };
+
   return (
     <>
       <b>React Version: {React.version}</b>
       <AddTodo onAddNewTodo={onAddNewTodo}></AddTodo>
-      <TodoList todos={todos} onDeleteTodo={onDeleteTodo}></TodoList>
+      <TodoList
+        todos={todos}
+        onDeleteTodo={onDeleteTodo}
+        onCheckTodo={onCheckTodo}
+      ></TodoList>
     </>
   );
 }
