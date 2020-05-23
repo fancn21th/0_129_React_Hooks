@@ -4,15 +4,13 @@ import TodoList from "./components/TodoList";
 import useLocalStorage from "./hooks/useLocalStorage";
 import useDocumentTitle from "./hooks/useDocumentTitle";
 
+const inCompleteTodosCount = (todos) =>
+  todos.reduce((acc, todo) => (!todo.completed ? acc + 1 : acc), 0);
+
 export default function ToDoList() {
   const [todos, setTodos] = useLocalStorage("todos", [], (values) => {});
-
-  const imCompleteTodosCount = todos.reduce(
-    (acc, todo) => (!todo.completed ? acc + 1 : acc),
-    0
-  );
-
-  const title = `Todos (${imCompleteTodosCount})`;
+  const inCompleteCount = inCompleteTodosCount(todos);
+  const title = `Todos (${inCompleteCount})`;
 
   useDocumentTitle(title);
 
