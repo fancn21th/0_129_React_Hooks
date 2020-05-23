@@ -1,29 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import AddTodo from "./components/AddTodo";
 import TodoList from "./components/TodoList";
-
-const useLocalStorage = (key, defaultValue, callback) => {
-  const initialValue = () => {
-    const valueFromStorage = JSON.parse(
-      window.localStorage.getItem(key) || JSON.stringify(defaultValue)
-    );
-    if (callback) callback(valueFromStorage);
-    return valueFromStorage;
-  };
-  const [storage, setStorage] = useState(initialValue);
-
-  useEffect(() => {
-    window.localStorage.setItem(key, JSON.stringify(storage));
-  }, [storage]);
-
-  return [storage, setStorage];
-};
-
-const useDocumentTitle = (title) => {
-  useEffect(() => {
-    document.title = title;
-  }, [title]);
-};
+import useLocalStorage from "./hooks/useLocalStorage";
+import useDocumentTitle from "./hooks/useDocumentTitle";
 
 export default function ToDoList() {
   const [todos, setTodos] = useLocalStorage("todos", [], (values) => {});
