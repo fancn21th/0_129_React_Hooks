@@ -8,6 +8,8 @@ const inCompleteTodosCount = (todos) =>
   todos.reduce((acc, todo) => (!todo.completed ? acc + 1 : acc), 0);
 
 export default function ToDoList() {
+  console.log("ToDoList App Refresh");
+
   const [todos, setTodos] = useLocalStorage("todos", [], (values) => {});
   const inCompleteCount = inCompleteTodosCount(todos);
   const title = `Todos (${inCompleteCount})`;

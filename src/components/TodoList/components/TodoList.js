@@ -5,6 +5,7 @@ export default function TodoList({
   onDeleteTodo = () => {},
   onCheckTodo = () => {},
 }) {
+  console.log("Todo List Comp Refresh");
   return (
     <ul>
       {todos.map(({ id, title, completed }) => (
